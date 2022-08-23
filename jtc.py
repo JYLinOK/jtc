@@ -10,7 +10,8 @@ import json
 import csv
 import os
 import ctypes
-import re
+import time
+
 
 
 
@@ -282,9 +283,7 @@ def get_fileName_extension(file_name):
 # Get the path of the file
 # T*
 def get_file_path(file_path_name):
-    return file_path_name[:-(reverse_str(file_path_name).index(".")+2)]
-
-
+    return file_path_name[:-(reverse_str(file_path_name).index("/"))]
 
 
 # =========================================================================================================
@@ -320,10 +319,17 @@ def connect_path_fileName(path, file_name):
 # T*
 def clear_dir(path):
     dir_list = list_dir(path)
+    print(f'{dir_list = }')
     for f in dir_list:
         f_path = connect_path_fileName(path, f)
-        # print(f'{f_path = }')
-        os.remove(f_path)
+        print(f'{f_path = }')
+        if '.' in f:
+            os.remove(f_path)
+        else:
+            if len(list_dir(f_path)) == 0:
+                os.rmdir(f_path)
+            else:
+                clear_dir(f_path)
 
 
 # ________________________________________________________________________________________________________
@@ -332,6 +338,7 @@ def clear_dir(path):
 def delete_dir(path):
     clear_dir(path)
     os.rmdir(path)
+        
 
 
 
