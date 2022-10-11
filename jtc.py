@@ -11,7 +11,8 @@ import csv
 import os
 import ctypes
 import time
-
+import subprocess
+from subprocess import Popen, PIPE
 
 
 
@@ -127,7 +128,11 @@ def delect_quots_of_str(quot_str):
 # Get the middle string by two ends strings
 # T*
 def get_b_from_abc(str_abc, str_a, str_c):
-    return str_abc.strip(str_a).strip(str_c)
+    if str_a != '':
+        return str_abc.strip(str_a).strip(str_c)
+    else:
+        ind = str_abc.index(str_c)
+        return str_abc[:ind]
 
 
 # ________________________________________________________________________________________________________
@@ -248,11 +253,41 @@ def if_path_or_file_exist(path):
 
 
 # ________________________________________________________________________________________________________
-# Judge is the path or file is null, if null then create
+# Judge is the path is null, if null then create
 # T*
 def if_path_not_exist_create(path):
     if not if_path_or_file_exist(path):
         os.makedirs(path)
+
+
+# ________________________________________________________________________________________________________
+# Judge is the path is null, if null then create, and return the judge result
+# T*
+def if_path_not_exist_create_judge(path):
+    if not if_path_or_file_exist(path):
+        os.makedirs(path)
+        return True
+    else:
+        return False
+
+
+# ________________________________________________________________________________________________________
+# Judge is the file is null, if null then create
+# T*
+def if_file_not_exist_create(file_path, default=''):
+    if not if_path_or_file_exist(file_path):
+        write_file(file_path, default)
+
+
+# ________________________________________________________________________________________________________
+# Judge is the file is null, if null then create, and return the judge result
+# T*
+def if_file_not_exist_create_judge(file_path, default=''):
+    if not if_path_or_file_exist(file_path):
+        write_file(file_path, default)
+        return True
+    else:
+        return False
 
 
 # ________________________________________________________________________________________________________
@@ -264,11 +299,21 @@ def get_extension(file_name):
 
 
 # ________________________________________________________________________________________________________
-# Get the pure and name of the file
+# Get the path and file name of the file
 # T*
-def get_pure_fileName(file_name):
+def get_path_fileName(file_name):
     rev_file_name = reverse_str(file_name)
     return reverse_str(rev_file_name.split('.')[1])
+
+
+
+# ________________________________________________________________________________________________________
+# Get the only and diret pure file name of the file
+# T*
+def get_only_fileName(file_name):
+    path_fileName = get_path_fileName(file_name)
+    return path_fileName.split('/')[-1]
+
 
 
 # ________________________________________________________________________________________________________
@@ -284,6 +329,13 @@ def get_fileName_extension(file_name):
 # T*
 def get_file_path(file_path_name):
     return file_path_name[:-(reverse_str(file_path_name).index("/"))]
+
+
+# ________________________________________________________________________________________________________
+# Get the path of the file with no sprit symbol
+# T*
+def get_file_path_noSprit(file_path_name):
+    return file_path_name[:-(reverse_str(file_path_name).index("/"))-1]
 
 
 # =========================================================================================================
@@ -317,19 +369,32 @@ def connect_path_fileName(path, file_name):
 # ________________________________________________________________________________________________________
 # Clear the dir
 # T*
+pre_path = ''
+set_pre_path = False
 def clear_dir(path):
+    global pre_path
+    global set_pre_path
+    if not set_pre_path:
+        pre_path = path
+        set_pre_path = True
     dir_list = list_dir(path)
-    print(f'{dir_list = }')
-    for f in dir_list:
-        f_path = connect_path_fileName(path, f)
-        print(f'{f_path = }')
-        if '.' in f:
-            os.remove(f_path)
-        else:
-            if len(list_dir(f_path)) == 0:
-                os.rmdir(f_path)
-            else:
-                clear_dir(f_path)
+    history_dir_list = []
+    if len(dir_list) > 0: 
+        for f in dir_list:
+            f_path = connect_path_fileName(path, f)
+            if os.path.isfile(f_path):
+                os.remove(f_path)
+            elif os.path.isdir(f_path):
+                if len(list_dir(f_path)) == 0:
+                    os.rmdir(f_path)
+                else:
+                    history_dir_list.append(f_path)
+                    clear_dir(f_path)
+    else:
+        os.rmdir(path)
+    if path != pre_path:
+        os.rmdir(path)
+
 
 
 # ________________________________________________________________________________________________________
@@ -339,7 +404,6 @@ def delete_dir(path):
     clear_dir(path)
     os.rmdir(path)
         
-
 
 
 # =========================================================================================================
@@ -352,6 +416,15 @@ def read_txt(f_path):
     with open(file=f_path, mode="r", encoding=txt_encoding) as f:
         txt_str = f.read()
         return txt_str
+
+
+# ________________________________________________________________________________________________________
+# Read a txt file with its path, in multiple lines
+# T*
+def readLines_txt(f_path):
+    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+        txt_str_list = f.readlines()
+        return txt_str_list
     
 
 # ________________________________________________________________________________________________________
@@ -649,10 +722,229 @@ def csv_2_txt_exten(csv_path, txt_path):
 
 
 
+# =====================================================================================================================
+# =====================================================================================================================
+# Other files
+# ________________________________________________________________________________________________________
+# Write a file with its path
+# T*
+def write_file(f_path, txt_str):
+    create_path_if_pathNul_from_filePath(f_path)
+    with open(file=f_path, mode="w", encoding=txt_encoding) as f:
+        f.write(txt_str)
+
+
+# ________________________________________________________________________________________________________
+# Write to add a file with its path behind the end of the file
+# T*
+def write_file_add(f_path, txt_str):
+    create_path_if_pathNul_from_filePath(f_path)
+    with open(file=f_path, mode="a", encoding=txt_encoding) as f:
+        f.write(txt_str)
+
+
+# ________________________________________________________________________________________________________
+# Read a file with its path
+# T*
+def read_file(f_path):
+    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+        file_str = f.read()
+        return file_str
+
+
+# ________________________________________________________________________________________________________
+# Read a file with its path, with multiple lines
+# T*
+def readLines_file(f_path):
+    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+        file_str_list = f.readlines()
+        return file_str_list
+
+
+# ________________________________________________________________________________________________________
+# Run mutiple codes in a list orderly
+# T*
+def run_codes(codes):
+    codes = strsList_2_str_and(codes)
+    os_codes = subprocess.Popen(codes, shell=True)
+    return os_codes
+
+
+# ________________________________________________________________________________________________________
+# Run mutiple codes in a list orderly
+# T*
+def run_codes_os(codes):
+    codes = strsList_2_str_and(codes)
+    os.system(codes)
+
+
+
+# ________________________________________________________________________________________________________
+# Last dir name of the path
+# T*
+def last_dir(path):
+    return path.split('/')[-1]
+
+
+# ________________________________________________________________________________________________________
+# First dir name of the path
+# T*
+def first_dir(path):
+    return path.split('/')[0]
+
+
+# ________________________________________________________________________________________________________
+# Combine the strs in a list to a big str
+# T*
+def strsList_2_str(strs_list):
+    big_str = ''
+    for str_i in strs_list:
+        big_str += str_i
+    return big_str
+
+
+# ________________________________________________________________________________________________________
+# Combine the strs in a list to a big str, with and
+# T*
+def strsList_2_str_and(strs_list):
+    big_str = ''
+    for str_i in strs_list:
+        big_str += str_i + ' & '
+    return big_str
+
+
+# ________________________________________________________________________________________________________
+# Combine the strs in a list to a big str, without space
+# T*
+def strsList_2_str_noSpace(strs_list):
+    big_str = ''
+    for str_i in strs_list:
+        big_str += str_i.strip()
+    return big_str
+
+
+# ________________________________________________________________________________________________________
+# Combine the strs in a list to a big str, with specific split
+# T*
+def strsList_2_str_split(strs_list, split=' '):
+    big_str = ''
+    for str_i in strs_list:
+        big_str += str_i.strip() + split
+    return big_str
+
+
+# ________________________________________________________________________________________________________
+# Combine the strs in a list to a big str, with specific split
+# T*
+def strsList_to_noSpace(strs_list):
+    big_strList = []
+    for str_i in strs_list:
+        big_strList.append(str_i.strip())
+    return big_strList
+
+
+# ________________________________________________________________________________________________________
+# Return if a str is a annotaiton or not
+# T*
+def if_annota(str, annota='#'):
+    if first_char(str) == annota:
+        return True
+    else: return False
+
+
+# ________________________________________________________________________________________________________
+# Return the first char of a str
+# T*
+def first_char(str):
+    for char in str:
+        if char not in ['', '\n', ' ']:
+            return char
+
+            
+# ________________________________________________________________________________________________________
+# Get a pure str from a str, delete the space and newline symbol
+# T*
+def str_noSpace(str):
+    new_str = ''
+    for i in str:
+        if i not in [' ']:
+            new_str += i
+    return new_str
+
+
+# ________________________________________________________________________________________________________
+# Delete any spaces in a str: Delete the br and space on the two end of a str
+# T*
+def str_pure(str):
+    new_str = ''
+    for i in str:
+        if i not in [' ', '\n']:
+            new_str += i
+    return new_str
+
+
+# ________________________________________________________________________________________________________
+# Delete br line str in str list and strip the space of the NOBR str
+# T*
+def delete_br_space_in_strList(strList):
+    bigStrList = []
+    for str_i in strList:
+        if str_i.strip() not in ['\n', '']:
+            bigStrList.append(str_pure(str_i))
+    return bigStrList
+
+
+
+
+# ________________________________________________________________________________________________________
+# Check if the substr is purely inside the str
+# T*
+def if_subStr_pureIn_str(subStr, str, able=['', ' ', '=', '\n']):
+    subStr = subStr.strip()
+    if subStr in str:
+        subStr_ind = str.index(subStr)
+        if subStr_ind != 0:
+            front_bit = str[subStr_ind-1:subStr_ind]
+        else:
+            front_bit = ''
+        if subStr_ind != len(str)-len(subStr):
+            back_bit = str[subStr_ind+len(subStr):subStr_ind+len(subStr)+1]
+        else:
+            back_bit = ''
+        if front_bit in able and back_bit in able:
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+
+# ________________________________________________________________________________________________________
+# Print item in str list one by one BR
+# T*
+def print_br_strList(strList):
+    for item in strList:
+        print(item)
+
+
+
+# ________________________________________________________________________________________________________
+# Get the middle str that is between two special strs
+# T*
+def str_between_2strs(astr, str1, str2):
+    ind1 = 0
+    ind2 = 0
+    if str1 in astr and str2 in astr:
+        ind1 = astr.index(str1)
+        ind2 = astr.index(str2)
+        return astr[ind1+len(str1):ind2]
+    
 
 
 
 
 
 
-
+# ========================================================
+# ========================================================
