@@ -43,42 +43,42 @@ VNAME_N = ''
 '''
 # Menu:
 VNAME_V = varible
-exec(get_v_name_code())
-print(f'{get_v_name(VNAME_N) = }')
+exec(v_name_code())
+print(f'{v_name(VNAME_N) = }')
 '''
 # T*
-def get_v_name_code():
+def v_name_code():
     lambda_coda = '''
-get_v_name_lambda = lambda v: [key for key, variable in globals().items() if variable == VNAME_V]
-VNAME_N = get_v_name_lambda(VNAME_V)
+v_name_lambda = lambda v: [key for key, variable in globals().items() if variable == VNAME_V]
+VNAME_N = v_name_lambda(VNAME_V)
 '''
     return lambda_coda
 
 # ________________________________________________________________________________________________________
 # Get the name of value
 # T*
-def get_v_name(VNAME_N):
+def v_name(VNAME_N):
     return VNAME_N[len(VNAME_N)-1]
 
 
 # ________________________________________________________________________________________________________
 # Get the code of: get the name of the function 
 # T*
-def get_fname_code():
+def fname_code():
     return 'sys._getframe().f_code.co_name' 
 
 
 # ________________________________________________________________________________________________________
 # Get the code of: get the f_locals dict of the function 
 # T*
-def get_flocals_dic_code():
+def flocals_dic_code():
     return 'sys._getframe().f_locals' 
 
 
 # ________________________________________________________________________________________________________
 # Get the value by its id
 # T*
-def get_value_by_id(obj_id):
+def value_by_id(obj_id):
     return ctypes.cast(obj_id, ctypes.py_object).value
 
 
@@ -127,7 +127,7 @@ def delect_quots_of_str(quot_str):
 # ________________________________________________________________________________________________________
 # Get the middle string by two ends strings
 # T*
-def get_b_from_abc(str_abc, str_a, str_c):
+def b_from_abc(str_abc, str_a, str_c):
     if str_a != '':
         return str_abc.strip(str_a).strip(str_c)
     else:
@@ -146,7 +146,7 @@ def add_ac_to_b_abc(str_a, str_b, str_c):
 # Add new a c to b to make new abc
 # T*
 def change_mid_num_str(str_abc, str_a, str_c, new_a, new_c):
-    b = get_b_from_abc(str_abc, str_a, str_c)
+    b = b_from_abc(str_abc, str_a, str_c)
     new_num_str = add_ac_to_b_abc(new_a, num_str_2_num(b), new_c)
     return new_num_str
 
@@ -241,7 +241,7 @@ def printft(input):
 # ________________________________________________________________________________________________________
 # Get now path 
 # T*
-def get_now_path():
+def now_path():
     return os.getcwd()
 
 
@@ -293,7 +293,7 @@ def if_file_not_exist_create_judge(file_path, default=''):
 # ________________________________________________________________________________________________________
 # Get the extension of the file
 # T*
-def get_extension(file_name):
+def extension(file_name):
     rev_file_name = reverse_str(file_name)
     return reverse_str(rev_file_name.split('.')[0])
 
@@ -301,7 +301,7 @@ def get_extension(file_name):
 # ________________________________________________________________________________________________________
 # Get the path and file name of the file
 # T*
-def get_path_fileName(file_name):
+def path_fileName(file_name):
     rev_file_name = reverse_str(file_name)
     return reverse_str(rev_file_name.split('.')[1])
 
@@ -310,16 +310,16 @@ def get_path_fileName(file_name):
 # ________________________________________________________________________________________________________
 # Get the only and diret pure file name of the file
 # T*
-def get_only_fileName(file_name):
-    path_fileName = get_path_fileName(file_name)
-    return path_fileName.split('/')[-1]
+def only_fileName(file_name):
+    a_path_fileName = path_fileName(file_name)
+    return a_path_fileName.split('/')[-1]
 
 
 
 # ________________________________________________________________________________________________________
 # Get the extension and name of the file
 # T*
-def get_fileName_extension(file_name):
+def fileName_extension(file_name):
     rev_file_name = reverse_str(file_name)
     return [reverse_str(rev_file_name.split('.')[1]), reverse_str(rev_file_name.split('.')[0])]
 
@@ -327,14 +327,14 @@ def get_fileName_extension(file_name):
 # ________________________________________________________________________________________________________
 # Get the path of the file
 # T*
-def get_file_path(file_path_name):
+def file_path(file_path_name):
     return file_path_name[:-(reverse_str(file_path_name).index("/"))]
 
 
 # ________________________________________________________________________________________________________
 # Get the path of the file with no sprit symbol
 # T*
-def get_file_path_noSprit(file_path_name):
+def file_path_noSprit(file_path_name):
     return file_path_name[:-(reverse_str(file_path_name).index("/"))-1]
 
 
@@ -344,8 +344,8 @@ def get_file_path_noSprit(file_path_name):
 # ________________________________________________________________________________________________________
 # If path not exist then create
 # T*
-def create_path_if_pathNul_from_filePath(file_path):
-    if_path_not_exist_create(get_file_path(file_path))
+def create_path_if_pathNul_from_filePath(path):
+    if_path_not_exist_create(file_path(path))
 
 
 # ________________________________________________________________________________________________________
@@ -497,9 +497,9 @@ def read_json_str(f_path):
 
 
 # ________________________________________________________________________________________________________
-# Load json content as a dict from a json file
+# Load json content as a dict or a list from a json file
 # T*
-def read_json_as_dict(f_path):
+def read_json_as_dict_or_list(f_path):
     with open(file=f_path, mode="r", encoding=json_encoding) as f:
         return json.load(f)
 
@@ -509,7 +509,7 @@ def read_json_as_dict(f_path):
 # T*
 def dictTxt_2_dict(dict_txt):
     return_dict = {}
-    b_dict_txt = get_b_from_abc(dict_txt, '{', '}')
+    b_dict_txt = b_from_abc(dict_txt, '{', '}')
     b_dict_txt_list = b_dict_txt.split(',')
     for kv in  b_dict_txt_list:
         k_v = kv.split(':')
@@ -808,8 +808,11 @@ def strsList_2_str(strs_list):
 # T*
 def strsList_2_str_and(strs_list):
     big_str = ''
-    for str_i in strs_list:
-        big_str += str_i + ' & '
+    for i in range(len(strs_list)):
+        if i < len(strs_list)-1:
+            big_str += strs_list[i] + ' & '
+        else:
+            big_str += strs_list[i]
     return big_str
 
 
@@ -940,6 +943,69 @@ def str_between_2strs(astr, str1, str2):
         ind2 = astr.index(str2)
         return astr[ind1+len(str1):ind2]
     
+
+
+# ________________________________________________________________________________________________________
+# Get the json files list in a sprcial dir
+# T* 
+def json_filesList_in_dir(dir):
+    files_list = os.listdir(dir)
+    # print(f"{files_list = }")
+    json_f_list = []
+    for file in files_list:
+        if extension(file) == 'json':
+            json_f_list.append(file)
+    return json_f_list
+
+
+
+# ________________________________________________________________________________________________________
+# Get the json file names list in a sprcial dir
+# T* 
+def json_fileListNames_in_dir(dir):
+    files_list = os.listdir(dir)
+    # print(f"{files_list = }")
+    json_f_name_list = []
+    for file in files_list:
+        if extension(file) == 'json':
+            json_f_name_list.append(file.split('.')[0])
+    return json_f_name_list
+
+
+
+# ________________________________________________________________________________________________________
+# Make split operation for each item in list
+# T*
+def split_items_in_strList(strList, asplit, ind):
+    new_list = []
+    for it in strList:
+        new_list.append(it.split(asplit)[ind])
+    return new_list
+
+
+# ________________________________________________________________________________________________________
+# Make split operation for each item in list
+# T*
+def split_items_in_strList_bySplitList(strList, splitList, ind):
+    new_list = []
+    for it in strList:
+        for item in splitList:
+            if item in it:
+                new_list.append(it.split(item)[ind])
+                break
+    return new_list
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
