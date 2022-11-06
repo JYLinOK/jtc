@@ -578,6 +578,22 @@ def read_csv(csv_path):
 
 
 # ________________________________________________________________________________________________________
+# Read a csv content from a csv file, and do process for each line, not return
+# T*
+def read_csv_process_func(csv_path, process_func):
+    with open(file=csv_path, newline=csv_newline) as f:
+        reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
+        # print(f'{reader = }')
+        csv_list = []
+        for row_i in reader:
+            csv_rwo_list = []
+            for item in row_i:
+                csv_rwo_list.append(item)
+            process_func(csv_rwo_list)
+
+
+
+# ________________________________________________________________________________________________________
 # Read a csv content from a csv file and return the numeric list
 # T*
 def read_csv_as_num(csv_path):
