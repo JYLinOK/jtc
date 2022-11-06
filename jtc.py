@@ -576,6 +576,17 @@ def read_csv(csv_path):
         return csv_list
 
 
+
+# ________________________________________________________________________________________________________
+# Read a csv content from a csv file and return a reader
+# T*
+def read_csv_2_reader(csv_path):
+    with open(file=csv_path, newline=csv_newline) as f:
+        reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
+        return reader
+
+
+
 # ________________________________________________________________________________________________________
 # Read a csv content from a csv file and return the numeric list
 # T*
