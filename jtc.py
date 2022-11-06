@@ -24,7 +24,7 @@ json_ensure_ascii = False
 # _____________________________________
 csv_newline = ''
 csv_delimiter = ','
-csv_quotechar = ' '
+csv_quotechar = '|'
 csv_quoting = csv.QUOTE_MINIMAL
 v = ''
 # _____________________________________
