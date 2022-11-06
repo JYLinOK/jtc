@@ -584,7 +584,6 @@ def read_csv_process_func(csv_path, process_func):
     with open(file=csv_path, newline=csv_newline) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
-        csv_list = []
         for row_i in reader:
             csv_rwo_list = []
             for item in row_i:
