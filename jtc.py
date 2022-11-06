@@ -580,7 +580,7 @@ def read_csv(csv_path):
 # ________________________________________________________________________________________________________
 # Read a csv content from a csv file, and do process for each line, not return
 # T*
-def read_csv_process_func(csv_path, process_func):
+def read_csv_process_eachLine_func(csv_path, process_func):
     with open(file=csv_path, newline=csv_newline) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
