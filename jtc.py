@@ -572,7 +572,7 @@ def read_csv(csv_path):
             csv_rwo_list = []
             for item in row_i:
                 csv_rwo_list.append(item)
-            csv_list.append(row_i)
+            csv_list.append(csv_rwo_list)
         return csv_list
 
 
