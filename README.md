@@ -10,11 +10,16 @@ Processsing for json txt and csv.
 # Author
     Jinwei Lin
 
+# Update:
+1. Normalize the commnets and definitions of the functions and function values.
+
+
 # DESCRIPTION
     @Author: Jinwei Lin
     @ORCID: 0003 0558 6699
     @Time: 2022/07/25
     @Description: Processsing libarary for json txt and csv.
+
 
 # FUNCTIONS
     abcStr_change_mid_num(str_abc: str, prestr_a: str, prestr_c: str, new_a: str, new_c: str)
