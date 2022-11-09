@@ -239,16 +239,18 @@ def printf(input):
 
 
 # ________________________________________________________________________________________________________
-# Print input with f'{input = }' and its type
-# T*
 def printt(input):
+    """
+    Print input with f'{input = }' and its type
+    """
     print(f'type({input}) = {type(input)}')
 
 
 # ________________________________________________________________________________________________________
-# Print input with f'{input = }' and its type
-# T*
 def printft(input):
+    """"
+    Print input with f'{input = }' and its type
+    """
     print(f'input = {input}, type({input}) = {type(input)}')
 
 
