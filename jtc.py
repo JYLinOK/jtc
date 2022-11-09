@@ -1127,8 +1127,8 @@ def split_items_in_strList_bySplitList(strList:list, splitList:list, ind:int):
 
 # ========================================================
 if __name__ == "__main__":
-    # import jtc
-    # print(help(jtc))
+    import jtc
+    print(help(jtc))
     print(f'jtc by Jinwei Lin')
 
 
