@@ -5,7 +5,6 @@
 @Description: Processsing libarary for json txt and csv.
 """
 
-
 import json
 import csv
 import os
@@ -48,6 +47,9 @@ print(f'{v_name(VNAME_N) = }')
 '''
 # T*
 def v_name_code():
+    """
+    Return the code to get the name of a value
+    """
     lambda_coda = '''
 v_name_lambda = lambda v: [key for key, variable in globals().items() if variable == VNAME_V]
 VNAME_N = v_name_lambda(VNAME_V)
@@ -1118,5 +1120,15 @@ def split_items_in_strList_bySplitList(strList:list, splitList:list, ind:int):
 
 
 
+
+
+
+
+
 # ========================================================
+if __name__ == "__main__":
+    print(f'jtc by Jinwei Lin')
+
+
+
 # ========================================================
