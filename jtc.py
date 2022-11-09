@@ -809,77 +809,86 @@ def csv_2_txt_exten(csv_path:str, txt_path:str):
 # =====================================================================================================================
 # Other files
 # ________________________________________________________________________________________________________
-# Write a file with its path
-# T*
-def write_file(f_path, txt_str):
+def write_file(f_path:str, txt_str:str):
+    """
+    Write a file with its path
+    """
     create_path_if_pathNul_from_filePath(f_path)
     with open(file=f_path, mode="w", encoding=txt_encoding) as f:
         f.write(txt_str)
 
 
 # ________________________________________________________________________________________________________
-# Write to add a file with its path behind the end of the file
-# T*
-def write_file_add(f_path, txt_str):
+def write_file_add(f_path:str, txt_str:str):
+    """
+    Write to add a file with its path behind the end of the file
+    """
     create_path_if_pathNul_from_filePath(f_path)
     with open(file=f_path, mode="a", encoding=txt_encoding) as f:
         f.write(txt_str)
 
 
 # ________________________________________________________________________________________________________
-# Read a file with its path
-# T*
-def read_file(f_path):
+def read_file(f_path:str):
+    """
+    Read a file with its path
+    """
     with open(file=f_path, mode="r", encoding=txt_encoding) as f:
         file_str = f.read()
         return file_str
 
 
 # ________________________________________________________________________________________________________
-# Read a file with its path, with multiple lines
-# T*
-def readLines_file(f_path):
+def readLines_file(f_path:str):
+    """
+    Read a file with its path, with multiple lines
+    """
     with open(file=f_path, mode="r", encoding=txt_encoding) as f:
         file_str_list = f.readlines()
         return file_str_list
 
 
 # ________________________________________________________________________________________________________
-# Run mutiple codes in a list orderly
-# T*
-def run_codes(codes):
+def run_codes(codes:str):
+    """
+    Run mutiple codes in a list orderly
+    """
     codes = strsList_2_str_and(codes)
     os_codes = subprocess.Popen(codes, shell=True)
     return os_codes
 
 
 # ________________________________________________________________________________________________________
-# Run mutiple codes in a list orderly
-# T*
-def run_codes_os(codes):
+def run_codes_os(codes:str):
+    """
+    Run mutiple codes in a list orderly
+    """
     codes = strsList_2_str_and(codes)
     os.system(codes)
 
 
 
 # ________________________________________________________________________________________________________
-# Last dir name of the path
-# T*
-def last_dir(path):
+def last_dir(path:str):
+    """
+    Last dir name of the path
+    """
     return path.split('/')[-1]
 
 
 # ________________________________________________________________________________________________________
-# First dir name of the path
-# T*
-def first_dir(path):
+def first_dir(path:str):
+    """
+    First dir name of the path
+    """
     return path.split('/')[0]
 
 
 # ________________________________________________________________________________________________________
-# Combine the strs in a list to a big str
-# T*
-def strsList_2_str(strs_list):
+def strsList_2_str(strs_list:list):
+    """"
+    Combine the strs in a list to a big str
+    """
     big_str = ''
     for str_i in strs_list:
         big_str += str_i
@@ -887,9 +896,10 @@ def strsList_2_str(strs_list):
 
 
 # ________________________________________________________________________________________________________
-# Combine the strs in a list to a big str, with and
-# T*
-def strsList_2_str_and(strs_list):
+def strsList_2_str_and(strs_list:list):
+    """
+    Combine the strs in a list to a big str, with and
+    """
     big_str = ''
     for i in range(len(strs_list)):
         if i < len(strs_list)-1:
@@ -900,9 +910,10 @@ def strsList_2_str_and(strs_list):
 
 
 # ________________________________________________________________________________________________________
-# Combine the strs in a list to a big str, without space
-# T*
-def strsList_2_str_noSpace(strs_list):
+def strsList_2_str_noSpace(strs_list:list):
+    """
+    Combine the strs in a list to a big str, without space
+    """
     big_str = ''
     for str_i in strs_list:
         big_str += str_i.strip()
@@ -910,9 +921,10 @@ def strsList_2_str_noSpace(strs_list):
 
 
 # ________________________________________________________________________________________________________
-# Combine the strs in a list to a big str, with specific split
-# T*
-def strsList_2_str_split(strs_list, split=' '):
+def strsList_2_str_split(strs_list:list, split:str=' '):
+    """
+    Combine the strs in a list to a big str, with specific split
+    """
     big_str = ''
     for str_i in strs_list:
         big_str += str_i.strip() + split
@@ -920,9 +932,10 @@ def strsList_2_str_split(strs_list, split=' '):
 
 
 # ________________________________________________________________________________________________________
-# Combine the strs in a list to a big str, with specific split
-# T*
-def strsList_to_noSpace(strs_list):
+def strsList_to_noSpace(strs_list:list):
+    """
+    Combine the strs in a list to a big str, with specific split
+    """
     big_strList = []
     for str_i in strs_list:
         big_strList.append(str_i.strip())
@@ -930,27 +943,30 @@ def strsList_to_noSpace(strs_list):
 
 
 # ________________________________________________________________________________________________________
-# Return if a str is a annotaiton or not
-# T*
-def if_annota(str, annota='#'):
+def if_annota(str:str, annota:str='#'):
+    """
+    Return if a str is a annotaiton or not
+    """
     if first_char(str) == annota:
         return True
     else: return False
 
 
 # ________________________________________________________________________________________________________
-# Return the first char of a str
-# T*
-def first_char(str):
+def first_char(str:str):
+    """
+    Return the first char of a str
+    """
     for char in str:
         if char not in ['', '\n', ' ']:
             return char
 
             
 # ________________________________________________________________________________________________________
-# Get a pure str from a str, delete the space and newline symbol
-# T*
-def str_noSpace(str):
+def str_noSpace(str:str):
+    """
+    Get a pure str from a str, delete the space and newline symbol
+    """
     new_str = ''
     for i in str:
         if i not in [' ']:
@@ -959,9 +975,10 @@ def str_noSpace(str):
 
 
 # ________________________________________________________________________________________________________
-# Delete any spaces in a str: Delete the br and space on the two end of a str
-# T*
-def str_pure(str):
+def str_pure(str:str):
+    """
+    Delete any spaces in a str: Delete the br and space on the two end of a str
+    """
     new_str = ''
     for i in str:
         if i not in [' ', '\n']:
@@ -970,9 +987,10 @@ def str_pure(str):
 
 
 # ________________________________________________________________________________________________________
-# Delete br line str in str list and strip the space of the NOBR str
-# T*
-def delete_br_space_in_strList(strList):
+def delete_br_space_in_strList(strList:list):
+    """
+    Delete br line str in str list and strip the space of the NOBR str
+    """
     bigStrList = []
     for str_i in strList:
         if str_i.strip() not in ['\n', '']:
@@ -981,11 +999,11 @@ def delete_br_space_in_strList(strList):
 
 
 
-
 # ________________________________________________________________________________________________________
-# Check if the substr is purely inside the str
-# T*
-def if_subStr_pureIn_str(subStr, str, able=['', ' ', '=', '\n']):
+def if_subStr_pureIn_str(subStr:str, str:str, able:list=['', ' ', '=', '\n']):
+    """
+    Check if the substr is purely inside the str
+    """
     subStr = subStr.strip()
     if subStr in str:
         subStr_ind = str.index(subStr)
@@ -1005,20 +1023,21 @@ def if_subStr_pureIn_str(subStr, str, able=['', ' ', '=', '\n']):
         return False
 
 
-
 # ________________________________________________________________________________________________________
-# Print item in str list one by one BR
-# T*
-def print_br_strList(strList):
+def print_br_strList(strList:list):
+    """
+    Print item in str list one by one BR
+    """
     for item in strList:
         print(item)
 
 
 
 # ________________________________________________________________________________________________________
-# Get the middle str that is between two special strs
-# T*
-def str_between_2strs(astr, str1, str2):
+def str_between_2strs(astr:str, str1:str, str2:str):
+    """
+    Get the middle str that is between two special strs
+    """
     ind1 = 0
     ind2 = 0
     if str1 in astr and str2 in astr:
@@ -1029,9 +1048,10 @@ def str_between_2strs(astr, str1, str2):
 
 
 # ________________________________________________________________________________________________________
-# Get the json files list in a sprcial dir
-# T* 
-def json_filesList_in_dir(dir):
+def json_filesList_in_dir(dir:str):
+    """
+    Get the json files list in a sprcial dir
+    """
     files_list = os.listdir(dir)
     # print(f"{files_list = }")
     json_f_list = []
@@ -1043,9 +1063,10 @@ def json_filesList_in_dir(dir):
 
 
 # ________________________________________________________________________________________________________
-# Get the json file names list in a sprcial dir
-# T* 
-def json_fileListNames_in_dir(dir):
+def json_fileListNames_in_dir(dir:str):
+    """
+    Get the json file names list in a sprcial dir
+    """
     files_list = os.listdir(dir)
     # print(f"{files_list = }")
     json_f_name_list = []
@@ -1057,9 +1078,10 @@ def json_fileListNames_in_dir(dir):
 
 
 # ________________________________________________________________________________________________________
-# Make split operation for each item in list
-# T*
-def split_items_in_strList(strList, asplit, ind):
+def split_items_in_strList(strList:list, asplit:str, ind:int):
+    """
+    Make split operation for each item in list
+    """
     new_list = []
     for it in strList:
         new_list.append(it.split(asplit)[ind])
@@ -1067,9 +1089,10 @@ def split_items_in_strList(strList, asplit, ind):
 
 
 # ________________________________________________________________________________________________________
-# Make split operation for each item in list
-# T*
-def split_items_in_strList_bySplitList(strList, splitList, ind):
+def split_items_in_strList_bySplitList(strList:list, splitList:list, ind:int):
+    """
+    Make split operation for each item in list
+    """
     new_list = []
     for it in strList:
         for item in splitList:
