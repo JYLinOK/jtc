@@ -633,7 +633,7 @@ def read_csv(csv_path:str):
 
 
 # ________________________________________________________________________________________________________
-def read_csv_process_eachLine_func(csv_path:str, process_func:function, **params):
+def read_csv_process_eachLine_func(csv_path:str, process_func, **params):
     """
     Read a csv content from a csv file, and do process for each line, not return
     """
@@ -1127,6 +1127,8 @@ def split_items_in_strList_bySplitList(strList:list, splitList:list, ind:int):
 
 # ========================================================
 if __name__ == "__main__":
+    # import jtc
+    # print(help(jtc))
     print(f'jtc by Jinwei Lin')
 
 
