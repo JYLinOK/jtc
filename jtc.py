@@ -55,30 +55,34 @@ VNAME_N = v_name_lambda(VNAME_V)
     return lambda_coda
 
 # ________________________________________________________________________________________________________
-# Get the name of value
-# T*
-def v_name(VNAME_N):
+def v_name(VNAME_N:object):
+    """
+    Get the name of value
+    """
     return VNAME_N[len(VNAME_N)-1]
 
 
 # ________________________________________________________________________________________________________
-# Get the code of: get the name of the function 
-# T*
 def fname_code():
+    """
+    Get the code of: get the name of the function 
+    """
     return 'sys._getframe().f_code.co_name' 
 
 
 # ________________________________________________________________________________________________________
-# Get the code of: get the f_locals dict of the function 
-# T*
 def flocals_dic_code():
+    """
+    Get the code of: get the f_locals dict of the function 
+    """
     return 'sys._getframe().f_locals' 
 
 
 # ________________________________________________________________________________________________________
-# Get the value by its id
-# T*
 def value_by_id(obj_id):
+    """
+    Get the value by its id
+    """
     return ctypes.cast(obj_id, ctypes.py_object).value
 
 
