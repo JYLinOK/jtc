@@ -90,30 +90,34 @@ def value_by_id(obj_id):
 # =========================================================================================================
 # String
 # ________________________________________________________________________________________________________
-# ________________________________________________________________________________________________________
-# Reverse the string
-# T*
-def reverse_str(str):
+def reverse_str(str:str):
+    """
+    Reverse the string
+    """
     return str[::-1]
 
 
 # ________________________________________________________________________________________________________
-# Get two ends of the string with range
-# T*
-def two_ends_of_str(str, front_c, end_c):
-    return [str[:front_c], str[-end_c:]]
+def two_ends_of_str(str, front_ind:int, end_ind:int):
+    """
+    Get two ends of the string with range
+    """
+    return [str[:front_ind], str[-end_ind:]]
+
 
 # ________________________________________________________________________________________________________
-# Get two chars of the ends of the string with range
-# T*
-def two_end_chars_of_str(str):
+def two_end_chars_of_str(str:str):
+    """
+    Get two chars of the ends of the string with range
+    """
     return two_ends_of_str(str, 1, 1)
 
 
 # ________________________________________________________________________________________________________
-# Check if the str is quotation marks str
-# T*
-def if_quots_str(str):
+def if_quots_str(str:str):
+    """
+    Check if the two ends of a str is quotations 
+    """
     if two_end_chars_of_str(str) == ['\'', '\''] or \
         two_end_chars_of_str(str) == ['\"', '\"']:
         return True
@@ -122,43 +126,48 @@ def if_quots_str(str):
 
 
 # ________________________________________________________________________________________________________
-# Delete the quotation marks of the str
-# T*
-def delect_quots_of_str(quot_str):
+def delect_quots_of_str(quot_str:str):
+    """
+    Delete the two ends quotation marks of the str
+    """
     return quot_str[1:-1]
 
 
 # ________________________________________________________________________________________________________
-# Get the middle string by two ends strings
-# T*
-def b_from_abc(str_abc, str_a, str_c):
-    if str_a != '':
-        return str_abc.strip(str_a).strip(str_c)
+def b_from_abcStr(str_abc:str, substr_a:str, substr_c:str):
+    """
+    Get the middle string by two end substrings
+    """
+    if substr_a != '':
+        return str_abc.strip(substr_a).strip(substr_c)
     else:
-        ind = str_abc.index(str_c)
+        ind = str_abc.index(substr_c)
         return str_abc[:ind]
 
 
 # ________________________________________________________________________________________________________
-# Add a c to b to make abc
-# T*
-def add_ac_to_b_abc(str_a, str_b, str_c):
-    return str_a + str_b + str_c
+def add_ac_to_b_abcStr(startstr_a:str, midstr_b:str, endstr_c:str):
+    """
+    Add startstr_a endstr_c to midstr_b to make str abc
+    """
+    return startstr_a + midstr_b + endstr_c
 
 
 # ________________________________________________________________________________________________________
-# Add new a c to b to make new abc
-# T*
-def change_mid_num_str(str_abc, str_a, str_c, new_a, new_c):
-    b = b_from_abc(str_abc, str_a, str_c)
-    new_num_str = add_ac_to_b_abc(new_a, num_str_2_num(b), new_c)
+def abcStr_change_mid_num(str_abc:str, prestr_a:str, prestr_c:str, new_a:str, new_c:str):
+    """
+    Change the middle num value of a abcStr
+    """
+    b = b_from_abcStr(str_abc, prestr_a, prestr_c)
+    new_num_str = add_ac_to_b_abcStr(new_a, num_str_2_num(b), new_c)
     return new_num_str
 
 
 # ________________________________________________________________________________________________________
-#  Change the int str to int variable
-# T*
-def int_str_2_int(int_str):
+def intStr_2_int(int_str:str):
+    """
+    Change the int str to int variable
+    """
     if int_str.isdigit():
         int_str = int_str[::-1]
         result = 0
@@ -192,8 +201,8 @@ def float_str_2_float(float_str):
     if float_s:
         head_str = float_s[0]
         end_str = float_s[1]
-        int_num = int_str_2_int(head_str)
-        decimals_num = int_str_2_int(end_str) / (10 ** len(end_str)) 
+        int_num = intStr_2_int(head_str)
+        decimals_num = intStr_2_int(end_str) / (10 ** len(end_str)) 
         return int_num + decimals_num
     else:
         return False
@@ -205,7 +214,7 @@ def float_str_2_float(float_str):
 def num_str_2_num(num_str):
     try:
         if num_str.isdigit():
-           return int_str_2_int(num_str)
+           return intStr_2_int(num_str)
         elif if_float_str(num_str):
             return float_str_2_float(num_str)
         else:
