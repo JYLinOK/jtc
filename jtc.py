@@ -259,31 +259,35 @@ def printft(input):
 # Path
 # ________________________________________________________________________________________________________
 # ________________________________________________________________________________________________________
-# Get now path 
-# T*
 def now_path():
+    """
+    Get now working path 
+    """
     return os.getcwd()
 
 
 # ________________________________________________________________________________________________________
-# Judge is the path or file is existed or null 
-# T*
-def if_path_or_file_exist(path):
+def if_path_or_file_exist(path:str):
+    """
+    Judge is a path or file is existed or null 
+    """
     return True if os.path.exists(path) else False
 
 
 # ________________________________________________________________________________________________________
-# Judge is the path is null, if null then create
-# T*
-def if_path_not_exist_create(path):
+def if_path_not_exist_create(path:str):
+    """
+    Judge is a path is null, if null then create
+    """
     if not if_path_or_file_exist(path):
         os.makedirs(path)
 
 
 # ________________________________________________________________________________________________________
-# Judge is the path is null, if null then create, and return the judge result
-# T*
-def if_path_not_exist_create_judge(path):
+def if_path_not_exist_create_judge(path:str):
+    """
+    Judge is a path is null, if null then create, and return the judge result
+    """
     if not if_path_or_file_exist(path):
         os.makedirs(path)
         return True
@@ -292,69 +296,75 @@ def if_path_not_exist_create_judge(path):
 
 
 # ________________________________________________________________________________________________________
-# Judge is the file is null, if null then create
-# T*
-def if_file_not_exist_create(file_path, default=''):
+def if_file_not_exist_create(file_path:str, default_write:str=''):
+    """"
+    Judge is a file is null, if null then create
+    """
     if not if_path_or_file_exist(file_path):
-        write_file(file_path, default)
+        write_file(file_path, default_write)
 
 
 # ________________________________________________________________________________________________________
-# Judge is the file is null, if null then create, and return the judge result
-# T*
-def if_file_not_exist_create_judge(file_path, default=''):
+def if_file_not_exist_create_judge(file_path:str, default_write:str=''):
+    """
+    Judge if a file is null, if null then create, and return the judge result
+    """
     if not if_path_or_file_exist(file_path):
-        write_file(file_path, default)
+        write_file(file_path, default_write)
         return True
     else:
         return False
 
 
 # ________________________________________________________________________________________________________
-# Get the extension of the file
-# T*
-def extension(file_name):
-    rev_file_name = reverse_str(file_name)
-    return reverse_str(rev_file_name.split('.')[0])
+def file_extension(file_path:str):
+    """
+    Get the extension of a file
+    """
+    rev_file_path = reverse_str(file_path)
+    return reverse_str(rev_file_path.split('.')[0])
 
 
 # ________________________________________________________________________________________________________
-# Get the path and file name of the file
-# T*
-def path_fileName(file_name):
-    rev_file_name = reverse_str(file_name)
-    return reverse_str(rev_file_name.split('.')[1])
-
+def path_fileName(file_path:str):
+    """
+    Get the path and file name of a file
+    """
+    rev_file_path = reverse_str(file_path)
+    return reverse_str(rev_file_path.split('.')[1])
 
 
 # ________________________________________________________________________________________________________
-# Get the only and diret pure file name of the file
-# T*
-def only_fileName(file_name):
-    a_path_fileName = path_fileName(file_name)
+def only_fileName(file_path:str):
+    """
+    Get the only and diret pure file name of a file
+    """
+    a_path_fileName = path_fileName(file_path)
     return a_path_fileName.split('/')[-1]
 
 
+# ________________________________________________________________________________________________________
+def fileName_fileExtension(file_path:str):
+    """
+    Get the extension and name of a file
+    """
+    rev_file_path = reverse_str(file_path)
+    return [reverse_str(rev_file_path.split('.')[1]), reverse_str(rev_file_path.split('.')[0])]
+
 
 # ________________________________________________________________________________________________________
-# Get the extension and name of the file
-# T*
-def fileName_extension(file_name):
-    rev_file_name = reverse_str(file_name)
-    return [reverse_str(rev_file_name.split('.')[1]), reverse_str(rev_file_name.split('.')[0])]
-
-
-# ________________________________________________________________________________________________________
-# Get the path of the file
-# T*
-def file_path(file_path_name):
+def file_path(file_path_name:str):
+    """
+    Get the exist dir of a file
+    """
     return file_path_name[:-(reverse_str(file_path_name).index("/"))]
 
 
 # ________________________________________________________________________________________________________
-# Get the path of the file with no sprit symbol
-# T*
-def file_path_noSprit(file_path_name):
+def file_path_noSprit(file_path_name:str):
+    """
+    Get the path of the file with no sprit symbol
+    """
     return file_path_name[:-(reverse_str(file_path_name).index("/"))-1]
 
 
@@ -529,7 +539,7 @@ def read_json_as_dict_or_list(f_path):
 # T*
 def dictTxt_2_dict(dict_txt):
     return_dict = {}
-    b_dict_txt = b_from_abc(dict_txt, '{', '}')
+    b_dict_txt = b_from_abcStr(dict_txt, '{', '}')
     b_dict_txt_list = b_dict_txt.split(',')
     for kv in  b_dict_txt_list:
         k_v = kv.split(':')
@@ -989,7 +999,7 @@ def json_filesList_in_dir(dir):
     # print(f"{files_list = }")
     json_f_list = []
     for file in files_list:
-        if extension(file) == 'json':
+        if file_extension(file) == 'json':
             json_f_list.append(file)
     return json_f_list
 
@@ -1003,7 +1013,7 @@ def json_fileListNames_in_dir(dir):
     # print(f"{files_list = }")
     json_f_name_list = []
     for file in files_list:
-        if extension(file) == 'json':
+        if file_extension(file) == 'json':
             json_f_name_list.append(file.split('.')[0])
     return json_f_name_list
 
