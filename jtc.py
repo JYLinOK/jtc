@@ -372,24 +372,27 @@ def file_path_noSprit(file_path_name:str):
 # Dir and Path
 # ________________________________________________________________________________________________________
 # ________________________________________________________________________________________________________
-# If path not exist then create
-# T*
-def create_path_if_pathNul_from_filePath(path):
+def create_path_if_pathNul_from_filePath(path:str):
+    """
+    If path not exist then create
+    """
     if_path_not_exist_create(file_path(path))
 
 
 # ________________________________________________________________________________________________________
-# List all files on the dir
-# T*
-def list_dir(path):
+def list_dir(path:str):
+    """
+    List all files and folders on the dir
+    """
     dir_list = os.listdir(path)
     return dir_list
 
 
 # ________________________________________________________________________________________________________
-# Connect path and file name
-# T*
-def connect_path_fileName(path, file_name):
+def connect_path_fileName(path:str, file_name:str):
+    """
+    Connect path and file name
+    """
     if path[-1] == '/':
         return path + file_name
     else:
@@ -397,11 +400,12 @@ def connect_path_fileName(path, file_name):
 
 
 # ________________________________________________________________________________________________________
-# Clear the dir
-# T*
 pre_path = ''
 set_pre_path = False
-def clear_dir(path):
+def clear_dir(path:str):
+    """
+    Clear the dir
+    """
     global pre_path
     global set_pre_path
     if not set_pre_path:
@@ -428,9 +432,10 @@ def clear_dir(path):
 
 
 # ________________________________________________________________________________________________________
-# Delete the dir
-# T*
-def delete_dir(path):
+def delete_dir(path:str):
+    """
+    Delete the dir
+    """
     clear_dir(path)
     os.rmdir(path)
         
@@ -440,9 +445,10 @@ def delete_dir(path):
 # Read and Write
 # ________________________________________________________________________________________________________
 # ________________________________________________________________________________________________________
-# Open a txt file with its path
-# T*
 def read_txt(f_path):
+    """
+    Open a txt file with its path
+    """
     with open(file=f_path, mode="r", encoding=txt_encoding) as f:
         txt_str = f.read()
         return txt_str
