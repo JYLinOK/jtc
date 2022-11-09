@@ -613,9 +613,10 @@ def write_dict_in_txt(f_path:str, dict:dict):
 # =====================================================================================================================
 # CSV
 # ________________________________________________________________________________________________________
-# Read a csv content from a csv file
-# T*
-def read_csv(csv_path):
+def read_csv(csv_path:str):
+    """
+    Read a csv content from a csv file
+    """
     with open(file=csv_path, newline=csv_newline) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
@@ -630,9 +631,10 @@ def read_csv(csv_path):
 
 
 # ________________________________________________________________________________________________________
-# Read a csv content from a csv file, and do process for each line, not return
-# T*
-def read_csv_process_eachLine_func(csv_path, process_func, **params):
+def read_csv_process_eachLine_func(csv_path:str, process_func:function, **params):
+    """
+    Read a csv content from a csv file, and do process for each line, not return
+    """
     with open(file=csv_path, newline=csv_newline) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
@@ -645,16 +647,18 @@ def read_csv_process_eachLine_func(csv_path, process_func, **params):
 
 
 # ________________________________________________________________________________________________________
-# Read a csv content from a csv file and return the numeric list
-# T*
-def read_csv_as_num(csv_path):
+def read_csv_as_num(csv_path:str):
+    """
+    Read a csv content from a csv file and return the numeric list
+    """
     return str2dlist_2_num2dlist(read_csv(csv_path))
 
 
 # ________________________________________________________________________________________________________
-# Write a csv content into a csv file with one row
-# T*
-def write_csv_row(csv_path, data):
+def write_csv_row(csv_path:str, data):
+    """
+    Write a csv content into a csv file with one row
+    """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='w', newline=csv_newline) as f:
         writer = csv.writer(f, delimiter=csv_delimiter, quotechar=csv_quotechar, quoting=csv_quoting)
@@ -662,9 +666,10 @@ def write_csv_row(csv_path, data):
   
 
 # ________________________________________________________________________________________________________
-# Write a csv content into a csv file with rows
-# T*
-def write_csv_rows(csv_path, data, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+def write_csv_rows(csv_path:str, data, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+    """
+    Write a csv content into a csv file with rows
+    """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='w', newline=csv_newline) as f:
         writer = csv.writer(f, delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
@@ -672,17 +677,19 @@ def write_csv_rows(csv_path, data, csvdelimi=csv_delimiter, csvquote=csv_quotech
 
 
 # ________________________________________________________________________________________________________
-# Copy the csv content from a copied csv file
-# T*
-def copy_csv(pre_csv_path, new_csv_path):
+def copy_csv(pre_csv_path:str, new_csv_path:str):
+    """
+    Copy the csv content from a copied csv file
+    """
     write_csv_rows(new_csv_path, read_csv(pre_csv_path))
 
 
 # ________________________________________________________________________________________________________
-# Read a csv content and change it to a dict
-# T*
-def read_csv_2_dict(csv_path):
-     with open(file=csv_path, newline=csv_newline) as f:
+def read_csv_2_dict(csv_path:str):
+    """
+    Read a csv content and change it to a dict
+    """
+    with open(file=csv_path, newline=csv_newline) as f:
         reader = csv.DictReader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         d = {}
         index = 0
@@ -693,10 +700,11 @@ def read_csv_2_dict(csv_path):
 
 
 # ________________________________________________________________________________________________________
-# Read a csv content from a csv file as a dict
-# Dict Example: d = {0: {'1': '4', '2': '5', '3': '6'}, 1: {'1': '7', '2': '8', '3': '9'}}
-# T*
-def write_dict_in_csv(csv_path, dict):
+def write_dict_in_csv(csv_path:str, dict:dict):
+    """
+    Read a csv content from a csv file as a dict
+    Dict Example: d = {0: {'1': '4', '2': '5', '3': '6'}, 1: {'1': '7', '2': '8', '3': '9'}}
+    """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='w', newline=csv_newline) as f:
         fieldnames = []
@@ -716,9 +724,10 @@ def write_dict_in_csv(csv_path, dict):
     
 
 # ________________________________________________________________________________________________________
-# Change str to csv list
-# T*
-def str_2_csvList(string):
+def str_2_csvList(string:str):
+    """
+    Change str to csv list
+    """
     csv_list = []
     line_tiems = string.split('\n')
     for i_line in line_tiems:
@@ -728,9 +737,10 @@ def str_2_csvList(string):
 
 
 # ________________________________________________________________________________________________________
-# Change csv list to str
-# T*
-def csvList_2_str(csv_list):
+def csvList_2_str(csv_list:list):
+    """
+    Change csv list to str
+    """
     list_str = ''
     len_column = len(csv_list[0])
     for r_i in csv_list:
@@ -745,24 +755,27 @@ def csvList_2_str(csv_list):
         
 
 # ________________________________________________________________________________________________________
-# Read txt file to list variable
-# T*
-def read_csvTxt_2_list(txt_path):
+def read_csvTxt_2_list(txt_path:str):
+    """
+    Read txt file to list variable
+    """
     txt_str = read_txt(txt_path)
     return str_2_csvList(txt_str)
 
 
 # ________________________________________________________________________________________________________
-# Change txt file to csv file 
-# T*
-def txt_2_csv(txt_path, csv_path, csv_delimiter=csv_delimiter):     
+def txt_2_csv(txt_path:str, csv_path:str, csv_delimiter=csv_delimiter):     
+    """
+    Change txt file to csv file 
+    """
     write_csv_rows(csv_path, read_csvTxt_2_list(txt_path), csvdelimi=csv_delimiter)
 
 
 # ________________________________________________________________________________________________________
-# Change csv file to txt file 
-# T*
-def csv_2_txt(csv_path, txt_path, delimiter=csv_delimiter):     
+def csv_2_txt(csv_path:str, txt_path:str, delimiter=csv_delimiter):     
+    """
+    Change csv file to txt file 
+    """
     csv_list = read_csv(csv_path)
     csv_str = ''
     for item_row in csv_list:
@@ -774,17 +787,19 @@ def csv_2_txt(csv_path, txt_path, delimiter=csv_delimiter):
 
 
 # ________________________________________________________________________________________________________
-# Change txt file to csv file by changing extension
-# T*
-def txt_2_csv_exten(txt_path, csv_path):
+def txt_2_csv_exten(txt_path:str, csv_path:str):
+    """
+    Change txt file to csv file by changing extension
+    """
     txt = read_txt(txt_path)
     write_txt(csv_path, txt)
 
 
 # ________________________________________________________________________________________________________
-# Change csv file to txt file by changing extension
-# T*
-def csv_2_txt_exten(csv_path, txt_path):
+def csv_2_txt_exten(csv_path:str, txt_path:str):
+    """
+    Change csv file to txt file by changing extension
+    """
     csv = read_csv(csv_path)
     write_txt(txt_path, csvList_2_str(csv))
 
