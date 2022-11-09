@@ -445,7 +445,7 @@ def delete_dir(path:str):
 # Read and Write
 # ________________________________________________________________________________________________________
 # ________________________________________________________________________________________________________
-def read_txt(f_path):
+def read_txt(f_path:str):
     """
     Open a txt file with its path
     """
@@ -455,58 +455,65 @@ def read_txt(f_path):
 
 
 # ________________________________________________________________________________________________________
-# Read a txt file with its path, in multiple lines
-# T*
-def readLines_txt(f_path):
+def readLines_txt(f_path:str):
+    """
+    Read a txt file with its path, in multiple lines
+    """
     with open(file=f_path, mode="r", encoding=txt_encoding) as f:
         txt_str_list = f.readlines()
         return txt_str_list
     
 
 # ________________________________________________________________________________________________________
-# Write a txt file with its path
-# T*
-def write_txt(f_path, txt_str):
+def write_txt(f_path:str, txt_str:str):
+    """
+    Write a txt file with its path
+    """
     create_path_if_pathNul_from_filePath(f_path)
     with open(file=f_path, mode="w", encoding=txt_encoding) as f:
         f.write(txt_str)
 
 
 # ________________________________________________________________________________________________________
-# Write to add a txt file with its path behind the end of the file
-# T*
-def write_txt_add(f_path, txt_str):
+def write_txt_add(f_path:str, txt_str:str):
+    """
+    Write to add a txt file with its path behind the end of the file
+    """
     create_path_if_pathNul_from_filePath(f_path)
     with open(file=f_path, mode="a", encoding=txt_encoding) as f:
         f.write(txt_str)
 
 
 # ________________________________________________________________________________________________________
-# Change dict to json str
-# T*
-def dict_2_jsonStr(dict):
+def dict_2_jsonStr(dict:dict):
+    """
+    Change dict to json str
+    """
     return json.dumps(dict)
 
 
 # ________________________________________________________________________________________________________
-# Change json dict to dict
-# T*
-def jsonStr_2_dict(json_str):
+def jsonStr_2_dict(json_str:str):
+    """
+    Change json dict to dict
+    """
     return json.loads(json_str)
 
 
 # ________________________________________________________________________________________________________
-# Change dict to json dict obj
-# json dict: all indexes are string type
-# T*
-def dict_2_jsonDict(dict):
+def dict_2_jsonDict(dict:dict):
+    """
+    Change dict to json dict obj
+    json dict: all indexes are string type
+    """
     return json.loads(dict_2_jsonStr(dict)) 
 
 
 # ________________________________________________________________________________________________________
-# Change string list to numeric list  
-# T*
-def strList_2_numList(str_list):
+def strList_2_numList(str_list:list):
+    """
+    Change string list to numeric list  
+    """
     num_list = []
     for item in str_list:
         num_list.append(numStr_2_num(item))
@@ -514,9 +521,10 @@ def strList_2_numList(str_list):
 
 
 # ________________________________________________________________________________________________________
-# Change 2D string list to 2D numeric list 
-# T*
-def str2dlist_2_num2dlist(str_list):
+def str2dlist_2_num2dlist(str_list:list):
+    """
+    Change 2D string list to 2D numeric list 
+    """
     d2_num_list = []
     for item_d2 in str_list:
         d2_num_list.append(strList_2_numList(item_d2))
@@ -524,26 +532,29 @@ def str2dlist_2_num2dlist(str_list):
 
 
 # ________________________________________________________________________________________________________
-# Read json str from a json file
-# T*
-def read_json_str(f_path):
+def read_json_str(f_path:str):
+    """
+    Read json str from a json file
+    """
     with open(file=f_path, mode="r", encoding=json_encoding) as f:
         txt_str = f.read()
         return txt_str
 
 
 # ________________________________________________________________________________________________________
-# Load json content as a dict or a list from a json file
-# T*
-def read_json_as_dict_or_list(f_path):
+def read_json_as_dict_or_list(f_path:str):
+    """
+    Load json content as a dict or a list from a json file
+    """
     with open(file=f_path, mode="r", encoding=json_encoding) as f:
         return json.load(f)
 
 
 # ________________________________________________________________________________________________________
-# Generate dict from dict txt
-# T*
-def dictTxt_2_dict(dict_txt):
+def dictTxt_2_dict(dict_txt:str):
+    """
+    Generate dict from dict txt
+    """
     return_dict = {}
     b_dict_txt = b_from_abcStr(dict_txt, '{', '}')
     b_dict_txt_list = b_dict_txt.split(',')
@@ -558,37 +569,42 @@ def dictTxt_2_dict(dict_txt):
 
 
 # ________________________________________________________________________________________________________
-# Read str from txt file and change it to dict
-# T*
-def read_txt_2_dict(f_path):
+def read_txt_2_dict(f_path:str):
+    """
+    Read str from txt file and change it to dict
+    """
     return jsonStr_2_dict(read_txt(f_path)) 
 
 
 # ________________________________________________________________________________________________________
-# Read str from txt file and change it to json dict
-# T*
-def read_txt_2_json_dict(f_path):
+def read_txt_2_json_dict(f_path:str):
+    """
+    Read str from txt file and change it to json dict
+    """
     return dict_2_jsonDict(jsonStr_2_dict(read_txt(f_path))) 
 
 
 # ________________________________________________________________________________________________________
-# Write json str into a json file
-# T*
-def write_str_in_json(f_path, json_str):
+def write_str_in_json(f_path:str, json_str:str):
+    """
+    Write json str into a json file
+    """
     write_txt(f_path, json_str)
 
 
 # ________________________________________________________________________________________________________
-# Write dict or json dict into a json file
-# T*
-def write_dict_in_json(f_path, dict):
+def write_dict_in_json(f_path:str, dict:dict):
+    """
+    Write dict or json dict into a json file
+    """
     write_txt(f_path, dict_2_jsonStr(dict))
 
 
 # ________________________________________________________________________________________________________
-# Write dict or json dict into a txt file
-# T*
-def write_dict_in_txt(f_path, dict):
+def write_dict_in_txt(f_path:str, dict:dict):
+    """
+    Write dict or json dict into a txt file
+    """
     write_txt(f_path, str(dict))
 
 
