@@ -107,8 +107,9 @@ def change_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
     new_str = ''
     while pre_subStr in astr:
         pre_subStr_ind = astr.index(pre_subStr)
-        new_str += astr[:pre_subStr_ind]+new_str
+        new_str += astr[:pre_subStr_ind]+new_subStr
         astr = astr[pre_subStr_ind+len(pre_subStr):]
+    new_str += astr
     return new_str
 
 
