@@ -159,8 +159,8 @@ def abcStr_change_mid_num(str_abc:str, prestr_a:str, prestr_c:str, new_a:str, ne
     Change the middle num value of a abcStr
     """
     b = b_from_abcStr(str_abc, prestr_a, prestr_c)
-    new_num_str = add_ac_to_b_abcStr(new_a, num_str_2_num(b), new_c)
-    return new_num_str
+    new_numStr = add_ac_to_b_abcStr(new_a, numStr_2_num(b), new_c)
+    return new_numStr
 
 
 # ________________________________________________________________________________________________________
@@ -179,10 +179,11 @@ def intStr_2_int(int_str:str):
 
 
 # ________________________________________________________________________________________________________
-#  Make a judgement that whether a string is a float numeric string 
-# T*
-def if_float_str(float_str):
-    str_split = float_str.split('.')
+def if_floatStr(floatStr:str):
+    """
+    Make a judgement that whether a string is a float numeric string
+    """
+    str_split = floatStr.split('.')
     # print(f'{str_split = }')
     if len(str_split) != 2:
         return False
@@ -194,10 +195,11 @@ def if_float_str(float_str):
 
 
 # ________________________________________________________________________________________________________
-#  Change the float str to float variable
-# T*
-def float_str_2_float(float_str):
-    float_s = if_float_str(float_str)
+def floatStr_2_float(floatStr:str):
+    """
+    Change the float str to float variable
+    """
+    float_s = if_floatStr(floatStr)
     if float_s:
         head_str = float_s[0]
         end_str = float_s[1]
@@ -209,18 +211,19 @@ def float_str_2_float(float_str):
 
 
 # ________________________________________________________________________________________________________
-# Change numeric string to numeric variable
-# T*
-def num_str_2_num(num_str):
+def numStr_2_num(numStr:str):
+    """
+    Change numeric string to numeric variable
+    """
     try:
-        if num_str.isdigit():
-           return intStr_2_int(num_str)
-        elif if_float_str(num_str):
-            return float_str_2_float(num_str)
+        if numStr.isdigit():
+           return intStr_2_int(numStr)
+        elif if_floatStr(numStr):
+            return floatStr_2_float(numStr)
         else:
             return False
     except:
-        return num_str
+        return numStr
 
 
 # =========================================================================================================
@@ -486,7 +489,7 @@ def dict_2_jsonDict(dict):
 def strList_2_numList(str_list):
     num_list = []
     for item in str_list:
-        num_list.append(num_str_2_num(item))
+        num_list.append(numStr_2_num(item))
     return num_list
 
 
@@ -529,7 +532,7 @@ def dictTxt_2_dict(dict_txt):
         key = k_v[0].split()[0]
         value = k_v[1].split()[0]
         if key.isdigit():
-            key = num_str_2_num(key)
+            key = numStr_2_num(key)
         return_dict[key] = value
     return return_dict
 
