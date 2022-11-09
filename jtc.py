@@ -92,36 +92,50 @@ def value_by_id(obj_id):
 # =========================================================================================================
 # String
 # ________________________________________________________________________________________________________
-def reverse_str(str:str):
+def reverse_str(astr:str):
     """
     Reverse the string
     """
-    return str[::-1]
+    return astr[::-1]
 
 
 # ________________________________________________________________________________________________________
-def two_ends_of_str(str, front_ind:int, end_ind:int):
+def change_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
+    """
+    Change all of the same special subStr in a astr, rewrite the astr
+    """
+    new_str = ''
+    while pre_subStr in astr:
+        pre_subStr_ind = astr.index(pre_subStr)
+        new_str += astr[:pre_subStr_ind]+new_str
+        astr = astr[pre_subStr_ind+len(pre_subStr):]
+    return new_str
+
+
+
+# ________________________________________________________________________________________________________
+def two_ends_of_str(astr, front_ind:int, end_ind:int):
     """
     Get two ends of the string with range
     """
-    return [str[:front_ind], str[-end_ind:]]
+    return [astr[:front_ind], astr[-end_ind:]]
 
 
 # ________________________________________________________________________________________________________
-def two_end_chars_of_str(str:str):
+def two_end_chars_of_str(astr:str):
     """
     Get two chars of the ends of the string with range
     """
-    return two_ends_of_str(str, 1, 1)
+    return two_ends_of_str(astr, 1, 1)
 
 
 # ________________________________________________________________________________________________________
-def if_quots_str(str:str):
+def if_quots_str(astr:str):
     """
-    Check if the two ends of a str is quotations 
+    Check if the two ends of a astr is quotations 
     """
-    if two_end_chars_of_str(str) == ['\'', '\''] or \
-        two_end_chars_of_str(str) == ['\"', '\"']:
+    if two_end_chars_of_str(astr) == ['\'', '\''] or \
+        two_end_chars_of_str(astr) == ['\"', '\"']:
         return True
     else:
         return False
@@ -130,7 +144,7 @@ def if_quots_str(str:str):
 # ________________________________________________________________________________________________________
 def delect_quots_of_str(quot_str:str):
     """
-    Delete the two ends quotation marks of the str
+    Delete the two ends quotation marks of the astr
     """
     return quot_str[1:-1]
 
@@ -150,7 +164,7 @@ def b_from_abcStr(str_abc:str, substr_a:str, substr_c:str):
 # ________________________________________________________________________________________________________
 def add_ac_to_b_abcStr(startstr_a:str, midstr_b:str, endstr_c:str):
     """
-    Add startstr_a endstr_c to midstr_b to make str abc
+    Add startstr_a endstr_c to midstr_b to make astr abc
     """
     return startstr_a + midstr_b + endstr_c
 
@@ -168,7 +182,7 @@ def abcStr_change_mid_num(str_abc:str, prestr_a:str, prestr_c:str, new_a:str, ne
 # ________________________________________________________________________________________________________
 def intStr_2_int(int_str:str):
     """
-    Change the int str to int variable
+    Change the int astr to int variable
     """
     if int_str.isdigit():
         int_str = int_str[::-1]
@@ -199,7 +213,7 @@ def if_floatStr(floatStr:str):
 # ________________________________________________________________________________________________________
 def floatStr_2_float(floatStr:str):
     """
-    Change the float str to float variable
+    Change the float astr to float variable
     """
     float_s = if_floatStr(floatStr)
     if float_s:
@@ -489,7 +503,7 @@ def write_txt_add(f_path:str, txt_str:str):
 # ________________________________________________________________________________________________________
 def dict_2_jsonStr(dict:dict):
     """
-    Change dict to json str
+    Change dict to json astr
     """
     return json.dumps(dict)
 
@@ -536,7 +550,7 @@ def str2dlist_2_num2dlist(str_list:list):
 # ________________________________________________________________________________________________________
 def read_json_str(f_path:str):
     """
-    Read json str from a json file
+    Read json astr from a json file
     """
     with open(file=f_path, mode="r", encoding=json_encoding) as f:
         txt_str = f.read()
@@ -573,7 +587,7 @@ def dictTxt_2_dict(dict_txt:str):
 # ________________________________________________________________________________________________________
 def read_txt_2_dict(f_path:str):
     """
-    Read str from txt file and change it to dict
+    Read astr from txt file and change it to dict
     """
     return jsonStr_2_dict(read_txt(f_path)) 
 
@@ -581,7 +595,7 @@ def read_txt_2_dict(f_path:str):
 # ________________________________________________________________________________________________________
 def read_txt_2_json_dict(f_path:str):
     """
-    Read str from txt file and change it to json dict
+    Read astr from txt file and change it to json dict
     """
     return dict_2_jsonDict(jsonStr_2_dict(read_txt(f_path))) 
 
@@ -589,7 +603,7 @@ def read_txt_2_json_dict(f_path:str):
 # ________________________________________________________________________________________________________
 def write_str_in_json(f_path:str, json_str:str):
     """
-    Write json str into a json file
+    Write json astr into a json file
     """
     write_txt(f_path, json_str)
 
@@ -607,7 +621,7 @@ def write_dict_in_txt(f_path:str, dict:dict):
     """
     Write dict or json dict into a txt file
     """
-    write_txt(f_path, str(dict))
+    write_txt(f_path, astr(dict))
 
 
 
@@ -728,7 +742,7 @@ def write_dict_in_csv(csv_path:str, dict:dict):
 # ________________________________________________________________________________________________________
 def str_2_csvList(string:str):
     """
-    Change str to csv list
+    Change astr to csv list
     """
     csv_list = []
     line_tiems = string.split('\n')
@@ -741,7 +755,7 @@ def str_2_csvList(string:str):
 # ________________________________________________________________________________________________________
 def csvList_2_str(csv_list:list):
     """
-    Change csv list to str
+    Change csv list to astr
     """
     list_str = ''
     len_column = len(csv_list[0])
@@ -783,7 +797,7 @@ def csv_2_txt(csv_path:str, txt_path:str, delimiter=csv_delimiter):
     for item_row in csv_list:
         csv_str_row = ''
         for item_column in item_row:
-            csv_str_row += str(item_column) + delimiter
+            csv_str_row += astr(item_column) + delimiter
         csv_str += csv_str_row + '\n'
     write_txt(txt_path, csv_str[:len(csv_str)-1])
 
@@ -889,7 +903,7 @@ def first_dir(path:str):
 # ________________________________________________________________________________________________________
 def strsList_2_str(strs_list:list):
     """"
-    Combine the strs in a list to a big str
+    Combine the strs in a list to a big astr
     """
     big_str = ''
     for str_i in strs_list:
@@ -900,7 +914,7 @@ def strsList_2_str(strs_list:list):
 # ________________________________________________________________________________________________________
 def strsList_2_str_and(strs_list:list):
     """
-    Combine the strs in a list to a big str, with and
+    Combine the strs in a list to a big astr, with and
     """
     big_str = ''
     for i in range(len(strs_list)):
@@ -914,7 +928,7 @@ def strsList_2_str_and(strs_list:list):
 # ________________________________________________________________________________________________________
 def strsList_2_str_noSpace(strs_list:list):
     """
-    Combine the strs in a list to a big str, without space
+    Combine the strs in a list to a big astr, without space
     """
     big_str = ''
     for str_i in strs_list:
@@ -925,7 +939,7 @@ def strsList_2_str_noSpace(strs_list:list):
 # ________________________________________________________________________________________________________
 def strsList_2_str_split(strs_list:list, split:str=' '):
     """
-    Combine the strs in a list to a big str, with specific split
+    Combine the strs in a list to a big astr, with specific split
     """
     big_str = ''
     for str_i in strs_list:
@@ -936,7 +950,7 @@ def strsList_2_str_split(strs_list:list, split:str=' '):
 # ________________________________________________________________________________________________________
 def strsList_to_noSpace(strs_list:list):
     """
-    Combine the strs in a list to a big str, with specific split
+    Combine the strs in a list to a big astr, with specific split
     """
     big_strList = []
     for str_i in strs_list:
@@ -945,44 +959,44 @@ def strsList_to_noSpace(strs_list:list):
 
 
 # ________________________________________________________________________________________________________
-def if_annota(str:str, annota:str='#'):
+def if_annota(astr:str, annota:str='#'):
     """
-    Return if a str is a annotaiton or not
+    Return if a astr is a annotaiton or not
     """
-    if first_char(str) == annota:
+    if first_char(astr) == annota:
         return True
     else: return False
 
 
 # ________________________________________________________________________________________________________
-def first_char(str:str):
+def first_char(astr:str):
     """
-    Return the first char of a str
+    Return the first char of a astr
     """
-    for char in str:
+    for char in astr:
         if char not in ['', '\n', ' ']:
             return char
 
             
 # ________________________________________________________________________________________________________
-def str_noSpace(str:str):
+def str_noSpace(astr:str):
     """
-    Get a pure str from a str, delete the space and newline symbol
+    Get a pure astr from a astr, delete the space and newline symbol
     """
     new_str = ''
-    for i in str:
+    for i in astr:
         if i not in [' ']:
             new_str += i
     return new_str
 
 
 # ________________________________________________________________________________________________________
-def str_pure(str:str):
+def str_pure(astr:str):
     """
-    Delete any spaces in a str: Delete the br and space on the two end of a str
+    Delete any spaces in a astr: Delete the br and space on the two end of a astr
     """
     new_str = ''
-    for i in str:
+    for i in astr:
         if i not in [' ', '\n']:
             new_str += i
     return new_str
@@ -991,7 +1005,7 @@ def str_pure(str:str):
 # ________________________________________________________________________________________________________
 def delete_br_space_in_strList(strList:list):
     """
-    Delete br line str in str list and strip the space of the NOBR str
+    Delete br line astr in astr list and strip the space of the NOBR astr
     """
     bigStrList = []
     for str_i in strList:
@@ -1002,19 +1016,19 @@ def delete_br_space_in_strList(strList:list):
 
 
 # ________________________________________________________________________________________________________
-def if_subStr_pureIn_str(subStr:str, str:str, able:list=['', ' ', '=', '\n']):
+def if_subStr_pureIn_str(subStr:str, astr:str, able:list=['', ' ', '=', '\n']):
     """
-    Check if the substr is purely inside the str
+    Check if the substr is purely inside the astr
     """
     subStr = subStr.strip()
-    if subStr in str:
-        subStr_ind = str.index(subStr)
+    if subStr in astr:
+        subStr_ind = astr.index(subStr)
         if subStr_ind != 0:
-            front_bit = str[subStr_ind-1:subStr_ind]
+            front_bit = astr[subStr_ind-1:subStr_ind]
         else:
             front_bit = ''
-        if subStr_ind != len(str)-len(subStr):
-            back_bit = str[subStr_ind+len(subStr):subStr_ind+len(subStr)+1]
+        if subStr_ind != len(astr)-len(subStr):
+            back_bit = astr[subStr_ind+len(subStr):subStr_ind+len(subStr)+1]
         else:
             back_bit = ''
         if front_bit in able and back_bit in able:
@@ -1028,7 +1042,7 @@ def if_subStr_pureIn_str(subStr:str, str:str, able:list=['', ' ', '=', '\n']):
 # ________________________________________________________________________________________________________
 def print_br_strList(strList:list):
     """
-    Print item in str list one by one BR
+    Print item in astr list one by one BR
     """
     for item in strList:
         print(item)
@@ -1038,7 +1052,7 @@ def print_br_strList(strList:list):
 # ________________________________________________________________________________________________________
 def str_between_2strs(astr:str, str1:str, str2:str):
     """
-    Get the middle str that is between two special strs
+    Get the middle astr that is between two special strs
     """
     ind1 = 0
     ind2 = 0
