@@ -39,13 +39,13 @@ VNAME_N = ''
 # ________________________________________________________________________________________________________
 # ________________________________________________________________________________________________________
 # Execute the the variables name code
-'''
+"""
 # Menu:
 VNAME_V = varible
 exec(v_name_code())
 print(f'{v_name(VNAME_N) = }')
-'''
-# T*
+"""
+
 def v_name_code():
     """
     Return the code to get the name of a value
