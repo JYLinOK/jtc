@@ -15,7 +15,7 @@ from subprocess import Popen, PIPE
 
 
 
-txt_encoding = 'utf-8'
+open_encoding = 'utf-8'
 # _____________________________________
 json_encoding = 'utf-8'
 json_indent = 3
@@ -466,7 +466,7 @@ def read_txt(f_path:str):
     """
     Open a txt file with its path
     """
-    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="r", encoding=open_encoding) as f:
         txt_str = f.read()
         return txt_str
 
@@ -476,7 +476,7 @@ def readLines_txt(f_path:str):
     """
     Read a txt file with its path, in multiple lines
     """
-    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="r", encoding=open_encoding) as f:
         txt_str_list = f.readlines()
         return txt_str_list
     
@@ -487,7 +487,7 @@ def write_txt(f_path:str, txt_str:str):
     Write a txt file with its path
     """
     create_path_if_pathNul_from_filePath(f_path)
-    with open(file=f_path, mode="w", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="w", encoding=open_encoding) as f:
         f.write(txt_str)
 
 
@@ -497,7 +497,7 @@ def write_txt_add(f_path:str, txt_str:str):
     Write to add a txt file with its path behind the end of the file
     """
     create_path_if_pathNul_from_filePath(f_path)
-    with open(file=f_path, mode="a", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="a", encoding=open_encoding) as f:
         f.write(txt_str)
 
 
@@ -634,7 +634,7 @@ def read_csv(csv_path:str):
     """
     Read a csv content from a csv file
     """
-    with open(file=csv_path, newline=csv_newline) as f:
+    with open(file=csv_path, newline=csv_newline, encoding=open_encoding) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
         csv_list = []
@@ -652,7 +652,7 @@ def read_csv_process_eachLine_func(csv_path:str, process_func, **params):
     """
     Read a csv content from a csv file, and do process for each line, not return
     """
-    with open(file=csv_path, newline=csv_newline) as f:
+    with open(file=csv_path, newline=csv_newline, encoding=open_encoding) as f:
         reader = csv.reader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         # print(f'{reader = }')
         for row_i in reader:
@@ -677,7 +677,7 @@ def write_csv_row(csv_path:str, data):
     Write a csv content into a csv file with one row
     """
     create_path_if_pathNul_from_filePath(csv_path)
-    with open(file=csv_path, mode='w', newline=csv_newline) as f:
+    with open(file=csv_path, mode='w', newline=csv_newline, encoding=open_encoding) as f:
         writer = csv.writer(f, delimiter=csv_delimiter, quotechar=csv_quotechar, quoting=csv_quoting)
         writer.writerow(data)
   
@@ -688,7 +688,7 @@ def write_csv_rows(csv_path:str, data, csvdelimi=csv_delimiter, csvquote=csv_quo
     Write a csv content into a csv file with rows
     """
     create_path_if_pathNul_from_filePath(csv_path)
-    with open(file=csv_path, mode='w', newline=csv_newline) as f:
+    with open(file=csv_path, mode='w', newline=csv_newline, encoding=open_encoding) as f:
         writer = csv.writer(f, delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
         writer.writerows(data)
 
@@ -706,7 +706,7 @@ def read_csv_2_dict(csv_path:str):
     """
     Read a csv content and change it to a dict
     """
-    with open(file=csv_path, newline=csv_newline) as f:
+    with open(file=csv_path, newline=csv_newline, encoding=open_encoding) as f:
         reader = csv.DictReader(f, delimiter=csv_delimiter, quotechar=csv_quotechar)
         d = {}
         index = 0
@@ -723,7 +723,7 @@ def write_dict_in_csv(csv_path:str, dict:dict):
     Dict Example: d = {0: {'1': '4', '2': '5', '3': '6'}, 1: {'1': '7', '2': '8', '3': '9'}}
     """
     create_path_if_pathNul_from_filePath(csv_path)
-    with open(file=csv_path, mode='w', newline=csv_newline) as f:
+    with open(file=csv_path, mode='w', newline=csv_newline, encoding=open_encoding) as f:
         fieldnames = []
         writer = csv.DictWriter(f, fieldnames=fieldnames)
         head = False
@@ -831,7 +831,7 @@ def write_file(f_path:str, txt_str:str):
     Write a file with its path
     """
     create_path_if_pathNul_from_filePath(f_path)
-    with open(file=f_path, mode="w", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="w", encoding=open_encoding, encoding=open_encoding) as f:
         f.write(txt_str)
 
 
@@ -841,7 +841,7 @@ def write_file_add(f_path:str, txt_str:str):
     Write to add a file with its path behind the end of the file
     """
     create_path_if_pathNul_from_filePath(f_path)
-    with open(file=f_path, mode="a", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="a", encoding=open_encoding) as f:
         f.write(txt_str)
 
 
@@ -850,7 +850,7 @@ def read_file(f_path:str):
     """
     Read a file with its path
     """
-    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="r", encoding=open_encoding) as f:
         file_str = f.read()
         return file_str
 
@@ -860,7 +860,7 @@ def readLines_file(f_path:str):
     """
     Read a file with its path, with multiple lines
     """
-    with open(file=f_path, mode="r", encoding=txt_encoding) as f:
+    with open(file=f_path, mode="r", encoding=open_encoding) as f:
         file_str_list = f.readlines()
         return file_str_list
 
