@@ -622,7 +622,7 @@ def write_dict_in_txt(f_path:str, dict:dict):
     """
     Write dict or json dict into a txt file
     """
-    write_txt(f_path, astr(dict))
+    write_txt(f_path, str(dict))
 
 
 
@@ -831,7 +831,7 @@ def write_file(f_path:str, txt_str:str):
     Write a file with its path
     """
     create_path_if_pathNul_from_filePath(f_path)
-    with open(file=f_path, mode="w", encoding=open_encoding, encoding=open_encoding) as f:
+    with open(file=f_path, mode="w", encoding=open_encoding) as f:
         f.write(txt_str)
 
 
