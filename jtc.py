@@ -672,7 +672,7 @@ def read_csv_as_num(csv_path:str):
 
 
 # ________________________________________________________________________________________________________
-def write_add_new_csv_row(csv_path:str, data:list):
+def write_add_new_csv_row(csv_path:str, data:list, delimiter:str=csv_delimiter, quotechar:str=csv_quotechar, quoting:str=csv_quoting):
     """
     Write to add a csv content line after the end a csv file with one row
     """
