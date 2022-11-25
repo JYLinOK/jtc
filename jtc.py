@@ -672,7 +672,7 @@ def read_csv_as_num(csv_path:str):
 
 
 # ________________________________________________________________________________________________________
-def write_csv_row(csv_path:str, data):
+def write_csv_row(csv_path:str, data:list):
     """
     Write a csv content into a csv file with one row
     """
@@ -683,7 +683,7 @@ def write_csv_row(csv_path:str, data):
   
 
 # ________________________________________________________________________________________________________
-def write_csv_rows(csv_path:str, data, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+def write_csv_rows(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
     """
     Write a csv content into a csv file with rows
     """
@@ -719,7 +719,7 @@ def read_csv_2_dict(csv_path:str):
 # ________________________________________________________________________________________________________
 def write_dict_in_csv(csv_path:str, dict:dict):
     """
-    Read a csv content from a csv file as a dict
+    Write a dict into a csv file by its structure
     Dict Example: d = {0: {'1': '4', '2': '5', '3': '6'}, 1: {'1': '7', '2': '8', '3': '9'}}
     """
     create_path_if_pathNul_from_filePath(csv_path)
@@ -738,6 +738,42 @@ def write_dict_in_csv(csv_path:str, dict:dict):
                break
         for i in dict:
             writer.writerow(dict[i])  
+
+
+# ________________________________________________________________________________________________________
+def write_dict_in_csv_byLines(csv_path:str, data:dict):
+    """
+    Write a dict into a csv file with one line by one line
+    Example:
+    a = {
+        "title":["123", "abc"],
+        "url":["http://123", "http://abc"],
+        "content":["this content 123", "this content abc"],
+    } will be writen as:
+    abc,http://abc,this content abc
+    abc,http://abc,this content abc
+    """
+    create_path_if_pathNul_from_filePath(csv_path)
+
+    alist = []
+    header = []
+    content = []
+
+    for it in data:
+        header.append(it)
+        content.append(data[it])
+    alist.append(header)
+    # alist += content
+    all_contents = []
+    for i in range(len(content[0])):
+        a_content = []
+        for it in content:
+            a_content.append(it[i])
+        all_contents.append(a_content)
+    alist = alist + all_contents
+    # print(f'{alist = }')
+    write_csv_rows(csv_path, alist)
+
     
 
 # ________________________________________________________________________________________________________
@@ -1017,6 +1053,19 @@ def delete_br_space_in_strList(strList:list):
 
 
 # ________________________________________________________________________________________________________
+def delete_space_in_strList(strList:list):
+    """
+    Delete br line astr in astr list and strip the space of the NOBR astr
+    """
+    bigStrList = []
+    for str_i in strList:
+        if str_i.strip() not in ['']:
+            bigStrList.append(str_pure(str_i))
+    return bigStrList
+
+
+
+# ________________________________________________________________________________________________________
 def if_subStr_pureIn_str(subStr:str, astr:str, able:list=['', ' ', '=', '\n']):
     """
     Check if the substr is purely inside the astr
@@ -1142,8 +1191,8 @@ def split_items_in_strList_bySplitList(strList:list, splitList:list, ind:int):
 
 # ========================================================
 if __name__ == "__main__":
-    import jtc
-    print(help(jtc))
+    # import jtc
+    # print(help(jtc))
     print(f'jtc by Jinwei Lin')
 
 
