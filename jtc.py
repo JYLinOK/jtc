@@ -1042,7 +1042,7 @@ def str_pure(astr:str):
 # ________________________________________________________________________________________________________
 def delete_br_space_in_strList(strList:list):
     """
-    Delete br line astr in astr list and strip the space of the NOBR astr
+    Delete br and space line astr in astr list and strip the space of the NOBR astr
     """
     bigStrList = []
     for str_i in strList:
@@ -1055,7 +1055,7 @@ def delete_br_space_in_strList(strList:list):
 # ________________________________________________________________________________________________________
 def delete_space_in_strList(strList:list):
     """
-    Delete br line astr in astr list and strip the space of the NOBR astr
+    Delete space astr in astr list and strip the space of the NOBR astr
     """
     bigStrList = []
     for str_i in strList:
