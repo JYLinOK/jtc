@@ -1060,7 +1060,7 @@ def delete_space_in_strList(strList:list):
     bigStrList = []
     for str_i in strList:
         if str_i.strip() not in ['']:
-            bigStrList.append(str_pure(str_i))
+            bigStrList.append(str_i)
     return bigStrList
 
 
