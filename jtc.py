@@ -677,7 +677,7 @@ def write_add_new_csv_row(csv_path:str, data:list):
     Write to add a csv content line after the end a csv file with one row
     """
     create_path_if_pathNul_from_filePath(csv_path)
-    with open(file=csv_path, mode='w+', newline=csv_newline, encoding=open_encoding) as f:
+    with open(file=csv_path, mode='a', newline=csv_newline, encoding=open_encoding) as f:
         writer = csv.writer(f, delimiter=csv_delimiter, quotechar=csv_quotechar, quoting=csv_quoting)
         writer.writerow(data)
   
