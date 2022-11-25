@@ -741,7 +741,7 @@ def write_dict_in_csv(csv_path:str, dict:dict):
 
 
 # ________________________________________________________________________________________________________
-def write_dict_in_csv_byLines(csv_path:str, data:dict):
+def write_dict_in_csv_byLines(csv_path:str, data:dict, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
     """
     Write a dict into a csv file with one line by one line
     Example:
@@ -772,7 +772,7 @@ def write_dict_in_csv_byLines(csv_path:str, data:dict):
         all_contents.append(a_content)
     alist = alist + all_contents
     # print(f'{alist = }')
-    write_csv_rows(csv_path, alist)
+    write_csv_rows(csv_path, alist, csvdelimi, csvquote, csvquoting)
 
     
 
