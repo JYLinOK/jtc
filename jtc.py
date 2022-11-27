@@ -788,7 +788,7 @@ def write_dict_in_csv_byLines(csv_path:str, data:dict, csvdelimi=csv_delimiter, 
     # print(f'{alist = }')
     write_csv_rows(csv_path, alist, csvdelimi, csvquote, csvquoting)
 
-    
+
 
 # ________________________________________________________________________________________________________
 def str_2_csvList(string:str):
