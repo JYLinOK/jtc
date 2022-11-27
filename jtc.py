@@ -116,7 +116,7 @@ def Replace_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
 
 
 # ________________________________________________________________________________________________________
-def Replace_all_subStr_of_strs_in_strList(astr:str, pre_subStr:str, new_subStr:str, strList:list):
+def Replace_all_subStr_of_strs_in_strList(strList:list, pre_subStr:str, new_subStr:str):
     """
     Replace all of the same special subStr of every str in a str list
     """
