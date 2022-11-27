@@ -686,14 +686,14 @@ def read_csv_as_num(csv_path:str):
 
 
 # ________________________________________________________________________________________________________
-def write_csv_add_one_new_row(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+def write_csv_rows_add(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
     """
     Write to add a csv content line after the end a csv file with one row
     """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='a', newline=csv_newline, encoding=open_encoding) as f:
         writer = csv.writer(f,  delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
-        writer.writerow(data)
+        writer.writerows(data)
   
 
 # ________________________________________________________________________________________________________
