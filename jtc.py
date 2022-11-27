@@ -100,9 +100,9 @@ def reverse_str(astr:str):
 
 
 # ________________________________________________________________________________________________________
-def change_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
+def Replace_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
     """
-    Change all of the same special subStr in a astr, rewrite the astr
+    Replace all of the same special subStr in a astr, rewrite the astr
     """
     new_str = ''
     while pre_subStr in astr:
@@ -111,6 +111,20 @@ def change_all_subStr_in_str(astr:str, pre_subStr:str, new_subStr:str):
         astr = astr[pre_subStr_ind+len(pre_subStr):]
     new_str += astr
     return new_str
+
+
+
+
+# ________________________________________________________________________________________________________
+def Replace_all_subStr_of_strs_in_strList(astr:str, pre_subStr:str, new_subStr:str, strList:list):
+    """
+    Replace all of the same special subStr of every str in a str list
+    """
+    new_strList = []
+    for i_str in strList:
+        new_str = Replace_all_subStr_in_str(i_str, pre_subStr, new_subStr)
+        new_strList.append(new_str)
+    return new_strList
 
 
 
