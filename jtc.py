@@ -788,6 +788,42 @@ def write_dict_in_csv_byLines(csv_path:str, data:dict, csvdelimi=csv_delimiter, 
     # print(f'{alist = }')
     write_csv_rows(csv_path, alist, csvdelimi, csvquote, csvquoting)
 
+
+
+# ________________________________________________________________________________________________________
+def write_dict_in_csv_byLines_add(csv_path:str, data:dict, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+    """
+    Write a dict into a csv file with one line by one line, adding in the end
+    Example:
+    a = {
+        "title":["123", "abc"],
+        "url":["http://123", "http://abc"],
+        "content":["this content 123", "this content abc"],
+    } will be writen as:
+    abc,http://abc,this content abc
+    abc,http://abc,this content abc
+    """
+    create_path_if_pathNul_from_filePath(csv_path)
+
+    alist = []
+    header = []
+    content = []
+
+    for it in data:
+        header.append(it)
+        content.append(data[it])
+    alist.append(header)
+    # alist += content
+    all_contents = []
+    for i in range(len(content[0])):
+        a_content = []
+        for it in content:
+            a_content.append(it[i])
+        all_contents.append(a_content)
+    alist = alist + all_contents
+    # print(f'{alist = }')
+    write_csv_rows_add(csv_path, alist, csvdelimi, csvquote, csvquoting)
+
     
 
 # ________________________________________________________________________________________________________
