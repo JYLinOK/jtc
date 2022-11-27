@@ -685,10 +685,34 @@ def read_csv_as_num(csv_path:str):
     return str2dlist_2_num2dlist(read_csv(csv_path))
 
 
+
+# ________________________________________________________________________________________________________
+def write_csv_row_add(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+    """
+    Write to add a 1D list csv content line after the end a csv file with one row
+    """
+    create_path_if_pathNul_from_filePath(csv_path)
+    with open(file=csv_path, mode='a', newline=csv_newline, encoding=open_encoding) as f:
+        writer = csv.writer(f, delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
+        writer.writerow(data)
+  
+
+# ________________________________________________________________________________________________________
+def write_csv_row(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
+    """
+    Write a 1D list csv content into a csv file with rows
+    """
+    create_path_if_pathNul_from_filePath(csv_path)
+    with open(file=csv_path, mode='w', newline=csv_newline, encoding=open_encoding) as f:
+        writer = csv.writer(f, delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
+        writer.writerow(data)
+
+
+
 # ________________________________________________________________________________________________________
 def write_csv_rows_add(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
     """
-    Write to add a csv content line after the end a csv file with one row
+    Write to add a 2D list csv content line after the end a csv file with one row
     """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='a', newline=csv_newline, encoding=open_encoding) as f:
@@ -699,7 +723,7 @@ def write_csv_rows_add(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquot
 # ________________________________________________________________________________________________________
 def write_csv_rows(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquote=csv_quotechar, csvquoting=csv_quoting):
     """
-    Write a csv content into a csv file with rows
+    Write a 2D list csv content into a csv file with rows
     """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='w', newline=csv_newline, encoding=open_encoding) as f:
