@@ -692,7 +692,7 @@ def write_csv_rows_add(csv_path:str, data:list, csvdelimi=csv_delimiter, csvquot
     """
     create_path_if_pathNul_from_filePath(csv_path)
     with open(file=csv_path, mode='a', newline=csv_newline, encoding=open_encoding) as f:
-        writer = csv.writer(f,  delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
+        writer = csv.writer(f, delimiter=csvdelimi, quotechar=csvquote, quoting=csvquoting)
         writer.writerows(data)
   
 
