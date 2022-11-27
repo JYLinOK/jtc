@@ -884,7 +884,7 @@ def csv_2_txt(csv_path:str, txt_path:str, delimiter=csv_delimiter):
     for item_row in csv_list:
         csv_str_row = ''
         for item_column in item_row:
-            csv_str_row += astr(item_column) + delimiter
+            csv_str_row += str(item_column) + delimiter
         csv_str += csv_str_row + '\n'
     write_txt(txt_path, csv_str[:len(csv_str)-1])
 
